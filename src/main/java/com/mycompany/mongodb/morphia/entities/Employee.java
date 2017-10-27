@@ -35,4 +35,13 @@ public class Employee {
 
     @Property("wage")
     private Double salary;
+
+    public Employee(String name, Double salary) {
+        this.name = name;
+        this.salary = salary;
+    }
+
+    public List<Employee> getDirectReports() {
+        return directReports;
+    }
 }
