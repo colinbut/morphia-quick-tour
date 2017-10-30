@@ -67,6 +67,11 @@ public class App {
         final UpdateResults updateResults = datastore.update(updateQuery, updateOperations);
         System.out.println(updateResults.getUpdatedCount());
 
+        // Removes
+        Query<Employee> removeQuery = datastore.createQuery(Employee.class)
+            .field("salary")
+            .lessThanOrEq(30000);
+        datastore.delete(removeQuery);
 
     }
 }
