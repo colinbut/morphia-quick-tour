@@ -5,6 +5,8 @@ import com.mycompany.mongodb.morphia.entities.Employee;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
 import org.mongodb.morphia.query.Query;
+import org.mongodb.morphia.query.UpdateOperations;
+import org.mongodb.morphia.query.UpdateResults;
 
 import java.util.List;
 
@@ -54,6 +56,16 @@ public class App {
         System.out.println("Underpaid employees");
         underPaidEmployees.stream().forEach(System.out::println);
 
+        // Updates
+        Query<Employee> updateQuery = datastore.createQuery(Employee.class)
+            .field("salary")
+            .lessThanOrEq(30000);
+
+        final UpdateOperations<Employee> updateOperations = datastore.createUpdateOperations(Employee.class)
+            .inc("salary", 10000);
+
+        final UpdateResults updateResults = datastore.update(updateQuery, updateOperations);
+        System.out.println(updateResults.getUpdatedCount());
 
 
     }
