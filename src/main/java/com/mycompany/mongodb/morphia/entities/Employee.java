@@ -15,6 +15,7 @@ import org.mongodb.morphia.annotations.Property;
 import org.mongodb.morphia.annotations.Reference;
 
 import java.util.List;
+import java.util.Objects;
 
 @Entity(value = "employees", noClassnameStored = true)
 @Indexes(
@@ -79,5 +80,38 @@ public class Employee {
 
     public List<Employee> getDirectReports() {
         return directReports;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Employee employee = (Employee) o;
+        return Objects.equals(id, employee.id) &&
+            Objects.equals(name, employee.name) &&
+            Objects.equals(manager, employee.manager) &&
+            Objects.equals(directReports, employee.directReports) &&
+            Objects.equals(salary, employee.salary);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, manager, directReports, salary);
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Employee{");
+        sb.append("id=").append(id);
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", manager=").append(manager);
+        sb.append(", directReports=").append(directReports);
+        sb.append(", salary=").append(salary);
+        sb.append('}');
+        return sb.toString();
     }
 }
