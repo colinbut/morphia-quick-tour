@@ -66,6 +66,10 @@ public class Employee {
         this.manager = manager;
     }
 
+    public List<Employee> getDirectReports() {
+        return directReports;
+    }
+
     public void setDirectReports(List<Employee> directReports) {
         this.directReports = directReports;
     }
@@ -76,10 +80,6 @@ public class Employee {
 
     public void setSalary(Double salary) {
         this.salary = salary;
-    }
-
-    public List<Employee> getDirectReports() {
-        return directReports;
     }
 
     @Override
